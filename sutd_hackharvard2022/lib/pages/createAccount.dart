@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motor_flutter/motor_flutter.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class MyCreateAccountPage extends StatefulWidget {
   final Function setLogin;
@@ -17,10 +18,12 @@ class _MyCreateAccountPageState extends State<MyCreateAccountPage> {
 
   void _createAccount() async {
     // Create a new account with the username and password
+    EasyLoading.show(status: 'loading...');
     AuthInfo response =
         await MotorFlutter.to.createAccount(passwordController.text);
     widget.setLogin(response.address, response.aesDscKey, response.aesPskKey);
     print(response);
+    EasyLoading.dismiss();
     Navigator.pop(context);
   }
 

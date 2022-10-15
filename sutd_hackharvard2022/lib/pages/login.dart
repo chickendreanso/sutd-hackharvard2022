@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:motor_flutter/motor_flutter.dart';
 import 'createAccount.dart';
 import 'appIntegration.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class MyLoginPage extends StatefulWidget {
   const MyLoginPage({super.key, required this.title});
@@ -35,12 +36,14 @@ class _MyLoginPageState extends State<MyLoginPage> {
   }
 
   void _login() async {
+    EasyLoading.show(status: 'loading...');
     var resp = await MotorFlutter.to.login(
         password: passwordController.text,
         address: _address,
         dscKey: _dscKey,
         pskKey: _pskKey);
     var resp2 = await MotorFlutter.to.connect();
+    EasyLoading.dismiss();
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -48,72 +51,27 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 const MyAppIntegration(title: "App Integration")));
   }
 
-  void _tempLogin() async {
-    final res = await MotorFlutter.to.createAccount(passwordController.text);
-    if (res == null) {
-      throw Exception('Account creation failed');
-    }
-    print('Account created successfully: ${res.address}');
-    setState(() {
-      _address = res.address;
-    });
-
-    final res2 = await MotorFlutter.to.connect();
-    if (res2 == null) {
-      throw Exception('Connection failed');
-    }
-    print('Connected successfully: ${res2}');
-  }
-
-  void _connect() async {
-    final res = await MotorFlutter.to.connect();
-    if (res == null) {
-      throw Exception('Connection failed');
-    }
-    print('Connected successfully: ${res}');
-  }
-
   void _createSchema() async {
-    final res = await MotorFlutter.to.publishSchema("Test",
-        {'name': SchemaFieldKind.create(), 'age': SchemaFieldKind.create()});
+    EasyLoading.show(status: 'loading...');
+    final res = await MotorFlutter.to.publishSchema("Test", {
+      'name': SchemaFieldKind(kind: Kind.STRING),
+      'age': SchemaFieldKind(kind: Kind.INT)
+    });
     if (res == null) {
       throw Exception('Schema creation failed');
     }
     print('Schema created successfully: ${res}');
+    EasyLoading.dismiss();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
@@ -169,21 +127,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
               ),
             ),
             Text(_address),
-            Container(
-              height: 50,
-              width: 200,
-              margin: const EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey,
-                ),
-                onPressed: _connect,
-                child: const Text(
-                  'Test Connect',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              ),
-            ),
             Container(
               height: 50,
               width: 200,

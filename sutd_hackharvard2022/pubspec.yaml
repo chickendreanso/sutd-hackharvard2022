@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   motor_flutter: ^0.9.1
   syncfusion_flutter_charts: ^20.3.49
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,10 @@ flutter:
   assets:
     - assets/images/jeff.png
     - assets/images/comingsoon.png
+    - assets/images/mirror.jpeg
+    - assets/images/beam.png
+    - assets/images/dtube.png
+    - assets/images/audius.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

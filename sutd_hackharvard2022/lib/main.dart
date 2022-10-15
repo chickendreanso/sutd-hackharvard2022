@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:motor_flutter/motor_flutter.dart';
 import 'pages/login.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 // Modify the main method to be Future<void>
 Future<void> main() async {
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyLoginPage(title: 'Login Page'),
+      builder: EasyLoading.init(),
     );
   }
 }
