@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:motor_flutter/motor_flutter.dart';
 import 'createAccount.dart';
+import 'appIntegration.dart';
 
 class MyLoginPage extends StatefulWidget {
   const MyLoginPage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -24,21 +15,71 @@ class _MyLoginPageState extends State<MyLoginPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String _address = "";
+  List<int>? _dscKey;
+  List<int>? _pskKey;
+
+  void _setLoginInfo(String address, List<int> dsckey, List<int> psckey) {
+    setState(() {
+      _address = address;
+      _dscKey = dsckey;
+      _pskKey = psckey;
+    });
+  }
 
   void _createAccountPage() async {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                const MyCreateAccountPage(title: "Create Account")));
+            builder: (context) => MyCreateAccountPage(
+                title: "Create Account", setLogin: _setLoginInfo)));
   }
 
   void _login() async {
-    var resp = await MotorFlutter.to
-        .login(password: passwordController.text, address: _address);
+    var resp = await MotorFlutter.to.login(
+        password: passwordController.text,
+        address: _address,
+        dscKey: _dscKey,
+        pskKey: _pskKey);
+    var resp2 = await MotorFlutter.to.connect();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const MyAppIntegration(title: "App Integration")));
+  }
+
+  void _tempLogin() async {
+    final res = await MotorFlutter.to.createAccount(passwordController.text);
+    if (res == null) {
+      throw Exception('Account creation failed');
+    }
+    print('Account created successfully: ${res.address}');
     setState(() {
-      _address = resp.owner;
+      _address = res.address;
     });
+
+    final res2 = await MotorFlutter.to.connect();
+    if (res2 == null) {
+      throw Exception('Connection failed');
+    }
+    print('Connected successfully: ${res2}');
+  }
+
+  void _connect() async {
+    final res = await MotorFlutter.to.connect();
+    if (res == null) {
+      throw Exception('Connection failed');
+    }
+    print('Connected successfully: ${res}');
+  }
+
+  void _createSchema() async {
+    final res = await MotorFlutter.to.publishSchema("Test",
+        {'name': SchemaFieldKind.create(), 'age': SchemaFieldKind.create()});
+    if (res == null) {
+      throw Exception('Schema creation failed');
+    }
+    print('Schema created successfully: ${res}');
   }
 
   @override
@@ -128,6 +169,36 @@ class _MyLoginPageState extends State<MyLoginPage> {
               ),
             ),
             Text(_address),
+            Container(
+              height: 50,
+              width: 200,
+              margin: const EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                ),
+                onPressed: _connect,
+                child: const Text(
+                  'Test Connect',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),
+            ),
+            Container(
+              height: 50,
+              width: 200,
+              margin: const EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                ),
+                onPressed: _createSchema,
+                child: const Text(
+                  'Test Create Schema',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),
+            ),
           ],
         ),
       ),
