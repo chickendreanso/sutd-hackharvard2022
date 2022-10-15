@@ -21,17 +21,21 @@ class _MyDashboardPageState extends State<MyDashboardPage> {
       body: Center(
         child: ListView(
           children: <Widget>[
-            Card(
+            const Card(
               child: Center(
                 child: Text("Summary #1"),
               ),
             ),
-            Card(
+            const Card(
               child: Center(
                 child: Text("Summary #2"),
               ),
             ),
-            BarChart(),
+            Card(
+              child: Center(
+                child: BarChart(),
+              ),
+            ),
           ],
         ),
       ),

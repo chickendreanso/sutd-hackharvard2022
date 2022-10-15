@@ -17,19 +17,20 @@ class _MyAppIntegrationState extends State<MyAppIntegration> {
         title: Text(widget.title),
       ),
       body: Center(
-          child: GridView(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        children: const [
-          appIntegrationCardWidget(
-              imagePath: "assets/images/jeff.png", appName: 'Beam'),
-          appIntegrationCardWidget(
-              imagePath: "assets/images/jeff.png", appName: 'Jeff'),
-          appIntegrationCardWidget(
-              imagePath: "assets/images/comingsoon.png",
-              appName: 'Coming soon!'),
-        ],
-      )),
+        child: GridView(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          children: const [
+            appIntegrationCardWidget(
+                imagePath: "assets/images/jeff.png", appName: 'Beam'),
+            appIntegrationCardWidget(
+                imagePath: "assets/images/jeff.png", appName: 'Jeff'),
+            appIntegrationCardWidget(
+                imagePath: "assets/images/comingsoon.png",
+                appName: 'Coming soon!'),
+          ],
+        ),
+      ),
     );
   }
 }
