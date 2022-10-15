@@ -1,0 +1,113 @@
+from transformers import pipeline
+
+def get_model(dialogue=None):
+
+    summarizer = pipeline("summarization", model="philschmid/bart-large-cnn-samsum")
+    if dialogue == None:
+        conversation = '''
+        "Nico : wa", 
+        "Nico : gg", 
+        "Nico : i also dk sia", 
+        "Nico : time to consult darren", 
+        "Nico : HAHAHA", 
+        "Nico : wa ok i dam stupifd", 
+        "Nico : i realised its actly not that complicated", 
+        "Jeff Lai : Huh vv", 
+        "Jeff Lai : Why how hah", 
+        "Nico : Its just 1 line", 
+        "Jeff Lai : But why not mine", 
+        "Jeff Lai : I want to find then the tangent line equal to zero right ?", 
+        "Nico : ok", 
+        "Nico : so", 
+        "Nico : the thing is", 
+        "Nico : they want to find crit point", 
+        "Nico : so that means f'(x) = 0", 
+        "Nico : if u think about it, newtons method originally is to find f(x) = 0", 
+        "Nico : he uses the tangent lines to approximate until he gets f(x) = 0", 
+        "Nico : since now u wanna find for f'(x) = 0, just change the degree of differentiation by 1", 
+        "Jeff Lai : Hmm, this I can understand ,", 
+        "Nico : niceee", 
+        "Jeff Lai : But why use the value 4 not the equation it self", 
+        "Nico : u know how i got 4 right", 
+        "Jeff Lai : The gradient of the equation", 
+        "Nico : yup", 
+        "Nico : so that literally means at x=2, f'(x) = 4", 
+        "Jeff Lai : Smth I am not clear about the tangent equation vs the 4", 
+        "Jeff Lai : Y=4(x)-9 is wad", 
+        "Nico : the tangent equation is only specific for x=2, at any other x value, the tangent equation is no longer applicable", 
+        "Nico : thats the eqn of your tangent line", 
+        "Jeff Lai : Ohhhh", 
+        "Nico : 4 is your gradient", 
+        "Nico : 9 is your y-axis intercept when x=0", 
+        "Nico : u rmb", 
+        "Nico : y = mx + c", 
+        "Jeff Lai : Yeaa", 
+        "Nico : ok nice", 
+        "Jeff Lai : I tot the gradient line is f\u2019(x)", 
+        "Jeff Lai : But it is not", 
+        "Jeff Lai : Tangent line *", 
+        "Nico : f'(x) is the gradient for all the different values of x", 
+        "Jeff Lai : \ud83e\udd26\ud83c\udffb\u200d\u2642\ufe0f", 
+        "Nico : but for the specific case of x=2, u use the line y = 4x - 9", 
+        "Jeff Lai : Yeaaa", 
+        "Jeff Lai : I mistreat the f\u2019(x) to (gradient)", 
+        "Jeff Lai : Thanks \ud83d\ude46\ud83c\udffb\u200d\u2642\ufe0f", 
+        "Jeff Lai : Sleeping le", 
+        "Nico : Gd night", 
+        "Jeff Lai : How to do 7 and 8 again? Nico", 
+        "Nico : I text u ltr", 
+        "Nico : I went out haha", 
+        "Nico : Which part u not sure", 
+        "Jeff Lai : Okok", 
+        "Jeff Lai : I can\u2019t get the answer", 
+        "Jeff Lai : For 7 is 1/7", 
+        "Nico : Can i see yr approach", 
+        "Jeff Lai : Wait I think I got it", 
+        "Jeff Lai : ", 
+        "Jeff Lai : Shyt but 8 I can\u2019t do", 
+        "Nico : This my sln for Q7 btw", 
+        "Nico : Q7 and Q8 tgt", 
+        "Nico : oh ya will u be coming back hostel tonite?", 
+        "Jeff Lai : Yes", 
+        "Jeff Lai : Why", 
+        "Nico : chris planning go for a run later around 10", 
+        "Nico : u wanna join us?", 
+        "Jeff Lai : Wahh", 
+        "Jeff Lai : See if I reach there by 10 anot haha", 
+        "Nico : btw the above working u can understand my thought flow right", 
+        "Nico : orhhh okk", 
+        "Jeff Lai : Yea, but for 8 is more like guessing is it ?", 
+        "Nico : its more of a observation", 
+        "Nico : like they gave us the vlaue of a", 
+        "Jeff Lai : Hmm okay~", 
+        "Nico : so how is f(x) related to a", 
+        "Jeff Lai : I know that the f(x) =2 but I just don\u2019t see x =0 \ud83d\ude05", 
+        "Jeff Lai : Now I see the answer I know haha", 
+        "Nico : u equate yr f(x) = a to solve for x if u rly cannot see, otherwise just eye power it to save time", 
+        "Jeff Lai : Ya but for the sin cos how to solve for x ?", 
+        "Nico : yea true", 
+        "Nico : so basically cannot hard solve this", 
+        "Nico : have to observe", 
+        "Nico : the special values for sin and cos", 
+        "Nico : like when u get 1 and when u get 0 for sin and cos across different vaues", 
+        "Jeff Lai : Yea , thanks :) I get it know", 
+        "Jeff Lai : Scare for the test haha", 
+        "Nico : dont worry", 
+        "Nico : that time during recess week i got consult prof caikui", 
+        "Nico : she say midterm2 will be alot easier", 
+        "Nico : coz they also dw ppl to fail actually", 
+        "Nico : like it doesnt benefit the profs nor the school", 
+        "Jeff Lai : \ud83d\udc4c\ud83c\udffb\ud83d\udc4d\ud83c\udffb"
+        '''
+    else:
+        conversation = dialogue
+
+    while True:
+        try:
+            output =summarizer(conversation)
+            print(output)
+            return output[0]['summary_text']
+           
+        except:
+            # cut conversation length by 10% and try again
+            conversation = conversation[:int(len(conversation)*0.9)]
