@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sutd_hackharvard2022/widgets/barChart.dart';
 import '../widgets/appIntegrationCard.dart';
 import '../widgets/barChart.dart';
+import '../widgets/pieChart.dart';
 
 class MyDashboardPage extends StatefulWidget {
   const MyDashboardPage({super.key, required this.title});
@@ -31,11 +32,8 @@ class _MyDashboardPageState extends State<MyDashboardPage> {
                 child: Text("Summary #2"),
               ),
             ),
-            Card(
-              child: Center(
-                child: BarChart(),
-              ),
-            ),
+            BarChart(),
+            PieChart(),
           ],
         ),
       ),
