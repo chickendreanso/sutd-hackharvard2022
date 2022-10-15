@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:motor_flutter/motor_flutter.dart';
 
-void main() {
+// Modify the main method to be Future<void>
+Future<void> main() async {
+  // Init method sets up State Management with GetX and ensures that Widgets are
+  // rendered before the Motor Node is ready.
+  await MotorFlutter.init();
+
+  // Start your App like normal
   runApp(const MyApp());
 }
 
