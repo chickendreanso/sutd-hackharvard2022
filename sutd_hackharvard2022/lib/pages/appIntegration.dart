@@ -20,7 +20,15 @@ class _MyAppIntegrationState extends State<MyAppIntegration> {
           child: GridView(
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        children: [appIntegrationCardWidget(), appIntegrationCardWidget()],
+        children: const [
+          appIntegrationCardWidget(
+              imagePath: "assets/images/jeff.png", appName: 'Beam'),
+          appIntegrationCardWidget(
+              imagePath: "assets/images/jeff.png", appName: 'Jeff'),
+          appIntegrationCardWidget(
+              imagePath: "assets/images/comingsoon.png",
+              appName: 'Coming soon!'),
+        ],
       )),
     );
   }

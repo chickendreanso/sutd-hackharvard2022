@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sutd_hackharvard2022/widgets/barChart.dart';
 import '../widgets/appIntegrationCard.dart';
+import '../widgets/barChart.dart';
 
 class MyDashboardPage extends StatefulWidget {
   const MyDashboardPage({super.key, required this.title});
@@ -29,6 +31,7 @@ class _MyDashboardPageState extends State<MyDashboardPage> {
                 child: Text("Summary #2"),
               ),
             ),
+            BarChart(),
           ],
         ),
       ),
