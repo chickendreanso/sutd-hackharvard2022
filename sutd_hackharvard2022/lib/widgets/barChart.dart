@@ -21,7 +21,7 @@ class BarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(40, 10, 40, 10),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: SfCartesianChart(
         primaryXAxis: CategoryAxis(),
         title: ChartTitle(text: 'Monthly sales analysis'),

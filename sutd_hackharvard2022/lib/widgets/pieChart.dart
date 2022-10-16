@@ -14,7 +14,7 @@ class PieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       // add left right margin of 40 and top bottom margin of 10
-      margin: EdgeInsets.fromLTRB(40, 10, 40, 10),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: SfCircularChart(
         title: ChartTitle(text: 'Sales by employee'),
         legend: Legend(isVisible: true),

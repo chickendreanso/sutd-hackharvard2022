@@ -126,7 +126,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 ),
               ),
             ),
-            Text(_address),
             Container(
               height: 50,
               width: 200,
