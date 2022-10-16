@@ -22,7 +22,7 @@ class _MyAppIntegrationState extends State<MyAppIntegration> {
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           children: const [
             appIntegrationCardWidget(
-                imagePath: "assets/images/beam.png", appName: 'Beam'),
+                imagePath: "assets/images/beam.jpeg", appName: 'Beam'),
             appIntegrationCardWidget(
                 imagePath: "assets/images/dtube.png", appName: 'D.Tube'),
             appIntegrationCardWidget(

@@ -24,7 +24,7 @@ class appIntegrationCardWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Image.asset(imagePath, height: 160),
+              Image.asset(imagePath, height: 150),
               Text(appName),
             ],
           ),

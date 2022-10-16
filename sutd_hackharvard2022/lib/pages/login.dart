@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:motor_flutter/motor_flutter.dart';
 import 'createAccount.dart';
 import 'appIntegration.dart';
+import 'admin.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class MyLoginPage extends StatefulWidget {
@@ -52,17 +53,27 @@ class _MyLoginPageState extends State<MyLoginPage> {
   }
 
   void _createSchema() async {
-    EasyLoading.show(status: 'loading...');
-    final res = await MotorFlutter.to.publishSchema("Test", {
-      'name': SchemaFieldKind(kind: Kind.STRING),
-      'age': SchemaFieldKind(kind: Kind.INT)
-    });
-    if (res == null) {
-      throw Exception('Schema creation failed');
-    }
-    print('Schema created successfully: ${res}');
-    EasyLoading.dismiss();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => MyAdminPage()));
+
+    // EasyLoading.show(status: 'loading...');
+    // final res = await MotorFlutter.to.publishSchema("Test", {
+    //   'name': SchemaFieldKind(kind: Kind.STRING),
+    //   'age': SchemaFieldKind(kind: Kind.INT)
+    // });
+    // if (res == null) {
+    //   throw Exception('Schema creation failed');
+    // }
+    // print('Schema created successfully: ${res}');
+    // EasyLoading.dismiss();
   }
+
+  // void _fetchSchema() async {
+  //   var mySchema = await MotorFlutter.to.getSchema("did schema");
+  //   setState(() {
+  //     _mySchema = mySchema;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,17 +85,17 @@ class _MyLoginPageState extends State<MyLoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Username',
-                    hintText:
-                        'Enter valid Address as snr1ioiaksldjfenkjaof29oi...'),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 15),
+            //   child: TextField(
+            //     controller: usernameController,
+            //     decoration: const InputDecoration(
+            //         border: OutlineInputBorder(),
+            //         labelText: 'Username',
+            //         hintText:
+            //             'Enter valid Address as snr1ioiaksldjfenkjaof29oi...'),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
@@ -126,21 +137,21 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 ),
               ),
             ),
-            Container(
-              height: 50,
-              width: 200,
-              margin: const EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey,
-                ),
-                onPressed: _createSchema,
-                child: const Text(
-                  'Test Create Schema',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              ),
-            ),
+            // Container(
+            //   height: 50,
+            //   width: 200,
+            //   margin: const EdgeInsets.only(top: 20),
+            //   child: ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: Colors.grey,
+            //     ),
+            //     onPressed: _createSchema,
+            //     child: const Text(
+            //       'Go to admin',
+            //       style: TextStyle(color: Colors.white, fontSize: 18),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
