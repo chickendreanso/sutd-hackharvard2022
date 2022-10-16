@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sutd_hackharvard2022/pages/friends.dart';
 import 'package:sutd_hackharvard2022/widgets/hourMostActive.dart';
 import 'package:sutd_hackharvard2022/widgets/messagesPerDay.dart';
 import '../widgets/appIntegrationCard.dart';
@@ -47,7 +48,13 @@ class _MyDashboardPageState extends State<MyDashboardPage> {
       body: Center(
         child: ListView(
           children: <Widget>[
-            TopFriends(),
+            GestureDetector(
+              onTap: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyFriendsPage()))
+              },
+              child: TopFriends(),
+            ),
             ChatCount(),
             BestChat(),
             HourMostActive(),
