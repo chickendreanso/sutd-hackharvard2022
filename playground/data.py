@@ -5,7 +5,7 @@ import seaborn as sns
 import numpy as np
 
 
-def filter_data(p ):
+def filter_data(p=1 ):
     print(p)
     with open('result.json', encoding='utf-8') as f:
         data = json.load(f)
@@ -79,7 +79,7 @@ def filter_data(p ):
                 messages.append(message['from'] + ' : ' + message['text'])
 
 
-    output = {'person':list(person_date_numChat.keys())[p],'x': x, 'y': y, 'dialogue':messages, 'summary':}
+    output = {'person':list(person_date_numChat.keys())[p],'x': x, 'y': y, 'dialogue':messages, 'summary':messages}
   
     return output
 

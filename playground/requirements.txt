@@ -1,0 +1,10 @@
+numpy
+json
+
+Flask
+Flask-Cors
+requests
+gunicorn
+ptvsd # Required for debugging.
+sentence-transformers
+
