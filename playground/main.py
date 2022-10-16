@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import json
-import ast
-from data import filter_data 
 
+from data import filter_data 
+from model import get_model
 
 app = Flask(__name__)
 CORS(app)
@@ -20,6 +19,16 @@ def filter():
     p = args['person']
     print(p)
     output= filter_data(p = int(p))
+    return output
+
+@app.route('/summarise', methods=['GET'])
+def summarise():
+    args = request.args
+    # data = request.get_json() 
+    print(args.items())
+    dia = args['dialogue']
+    print(dia)
+    output= get_model(dialogue = dia)
     return output
 
 
