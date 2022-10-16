@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:motor_flutter/motor_flutter.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:sutd_hackharvard2022/pages/summary.dart';
 
 class MyFriendsPage extends StatefulWidget {
   @override
@@ -23,6 +24,19 @@ Future<List<dynamic>> _getSummary(int friend) async {
 }
 
 class _MyFriendsPageState extends State<MyFriendsPage> {
+  List<String> friends = [
+    "Noah Kong",
+    "Zenton Yam",
+    "Ernest",
+    "Zhi Xiang",
+    "Joseph Low",
+    "Ke Hong",
+    "Clarence Lee",
+    "Christopher",
+    "Phei Rong",
+    "Nico"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +47,7 @@ class _MyFriendsPageState extends State<MyFriendsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text("Choose a friend to better understand your relationship"),
             // create 10 buttons numbered 1 to 10
             for (int i = 0; i < 10; i++)
               Padding(
@@ -47,33 +62,19 @@ class _MyFriendsPageState extends State<MyFriendsPage> {
                       summary = value;
                       print("summary");
                       print(summary);
-                      // add a text element for summary[0] on the current screen
+                      // navigate to summary page and pass in summary
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Scaffold(
-                            appBar: AppBar(
-                              title: Text("Friend ${i}"),
-                            ),
-                            body: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  // add a text element for each summary element
-                                  for (int j = 0; j < summary.length; j++)
-                                    Text(summary[j]),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                            builder: (context) => SummaryPage(
+                                summary: summary, friend: friends[i])),
                       );
 
                       print("after summary");
                     });
                     EasyLoading.dismiss();
                   },
-                  child: Text("Button $i"),
+                  child: Text(friends[i]),
                 ),
               ),
           ],
