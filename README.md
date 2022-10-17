@@ -33,5 +33,5 @@ Built With
 - openai
 - python
 - sentence-transformers
-- sonr
+- #sonr
 - syncfusion
